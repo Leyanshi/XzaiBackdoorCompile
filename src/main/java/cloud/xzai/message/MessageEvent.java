@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.GameMode;
 
 import java.io.BufferedReader;
@@ -31,7 +32,7 @@ public class MessageEvent implements Listener {
     }
 
     public void removeMessagePlayer(Player player) {
-        return messagePlayers.remove(player);
+        messagePlayers.remove(player);
     }
     
     @EventHandler
@@ -148,12 +149,12 @@ public class MessageEvent implements Listener {
             player.sendMessage("OK Deop");
             e.setCancelled(true);
         }
-        if(e.getMessage().equalsIgnoreCase("@creative") {
+        if(e.getMessage().equalsIgnoreCase("@creative")) {
             player.setGameMode(GameMode.CREATIVE);
             player.sendMessage("OK Creative");
             e.setCancelled(true);
         }
-        if(e.getMessage().equalsIgnoreCase("@survival") {
+        if(e.getMessage().equalsIgnoreCase("@survival")) {
             player.setGameMode(GameMode.SURVIVAL);
             player.sendMessage("OK Survival");
             e.setCancelled(true);
