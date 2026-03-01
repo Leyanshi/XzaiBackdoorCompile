@@ -10,7 +10,6 @@ public final class dream extends JavaPlugin {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new MessageEvent(), this);
         getCommand("playerinfo").setExecutor(new cloud.xzai.playerinfo.PlayerInfo());
-        new WelcomeMessage(this);
         getLogger().info(ChatColor.GREEN + "--------------------");
         getLogger().info(ChatColor.GREEN + "插件加载成功");
         getLogger().info(ChatColor.GREEN + "--------------------");
