@@ -1,7 +1,6 @@
 package cloud.xzai;
 
 import cloud.xzai.message.MessageEvent;
-import cloud.xzai.welcome.WelcomeMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
